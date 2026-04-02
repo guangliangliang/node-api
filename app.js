@@ -1,0 +1,48 @@
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const sequelize = require('./config/db');
+const errorHandler = require('./middleware/errorHandler');
+
+const categoryRoutes = require('./routes/categories');
+const apiRoutes = require('./routes/apis');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// 中间件
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || '*',
+  credentials: true
+}));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// 路由
+app.use('/api/categories', categoryRoutes);
+app.use('/api/apis', apiRoutes);
+
+// 健康检查
+app.get('/health', (req, res) => {
+  res.json({ code: 200, message: 'ok', timestamp: Date.now() });
+});
+
+// 错误处理
+app.use(errorHandler);
+
+// 启动服务
+const startServer = async () => {
+  try {
+    // 同步数据库，开发环境可设置alter: true自动更新表结构
+    await sequelize.sync({ alter: process.env.NODE_ENV === 'development' });
+    console.log('数据库同步完成');
+    
+    app.listen(PORT, () => {
+      console.log(`服务启动成功，运行在 http://localhost:${PORT}`);
+    });
+  } catch (err) {
+    console.error('服务启动失败:', err);
+  }
+};
+
+startServer();

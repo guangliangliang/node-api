@@ -1,0 +1,15 @@
+{
+  "name": "freeapi-backend",
+  "version": "1.0.0",
+  "description": "免费API平台后台服务",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "set NODE_ENV=development && node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["api", "free", "express"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
