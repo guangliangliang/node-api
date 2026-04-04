@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__MiniMax__understand_image",
+      "Bash(node -e ':*)",
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm list:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3001/health)",
+      "Bash(ls -la E:/github/node-api/.env*)",
+      "Bash(mysql:*)",
+      "Bash(where mysql:*)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Bash(/c/Program Files/MySQL/MySQL Server 8.0/bin/mysql.exe:*)",
+      "Bash(curl -s http://localhost:3001/api/categories)",
+      "Bash(curl:*)",
+      "Bash(taskkill //F //IM node.exe)",
+      "mcp__MiniMax__web_search",
+      "Bash(tasklist)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(rm -rf node_modules/.cache)",
+      "Bash(netstat -ano)",
+      "Bash(pkill -f \"node.*app.js\")",
+      "Bash(taskkill //F //PID 31148)",
+      "Bash(taskkill //F //PID 30860)"
+    ]
+  }
+}
