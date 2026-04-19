@@ -24,6 +24,7 @@ const options = {
       { name: '识别服务', description: '识别服务类接口' },
       { name: '实用工具', description: '实用工具类接口' },
       { name: '趣味查询', description: '趣味查询类接口' },
+      { name: '资讯热榜', description: '各平台热门榜单接口' },
       { name: '后台管理-分类', description: '分类管理接口' },
       { name: '后台管理-API', description: 'API管理接口' }
     ]

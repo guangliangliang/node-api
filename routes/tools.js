@@ -33,6 +33,24 @@ const { getCountdown } = require('../services/fun/countdown');
 const { calculateBMI } = require('../services/fun/bmi');
 const { getCalendar } = require('../services/fun/calendar');
 
+// 资讯热榜类
+const { getJuejinHot } = require('../services/hot/juejin');
+const { getZhihuHot } = require('../services/hot/zhihu');
+const { getV2exHot } = require('../services/hot/v2ex');
+const { getBilibiliHot } = require('../services/hot/bilibili');
+const { getWeiboHot } = require('../services/hot/weibo');
+const { getGithubHot } = require('../services/hot/github');
+const { getBaiduHot } = require('../services/hot/baidu');
+const { getCsdnHot } = require('../services/hot/csdn');
+const { get36krHot } = require('../services/hot/36kr');
+const { getMaoyanHot } = require('../services/hot/maoyan');
+const { getDoubanHot } = require('../services/hot/douban');
+const { getHupuHot } = require('../services/hot/hupu');
+const { getDouyinHot } = require('../services/hot/douyin');
+const { getKuaishouHot } = require('../services/hot/kuaishou');
+const { getToutiaoHot } = require('../services/hot/toutiao');
+const { getXiaohongshuHot } = require('../services/hot/xiaohongshu');
+
 // ==================== 生活查询类 ====================
 
 /**
@@ -710,6 +728,424 @@ router.get('/fun/bmi', async (req, res, next) => {
 router.get('/fun/calendar', async (req, res, next) => {
   try {
     const result = await getCalendar(req.query);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ==================== 资讯热榜类 ====================
+
+/**
+ * @swagger
+ * /api/tools/hot/juejin:
+ *   get:
+ *     summary: 掘金热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/juejin', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getJuejinHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/zhihu:
+ *   get:
+ *     summary: 知乎热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/zhihu', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getZhihuHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/v2ex:
+ *   get:
+ *     summary: V2EX热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/v2ex', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getV2exHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/bilibili:
+ *   get:
+ *     summary: B站热门榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/bilibili', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getBilibiliHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/weibo:
+ *   get:
+ *     summary: 微博热搜榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/weibo', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getWeiboHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/github:
+ *   get:
+ *     summary: GitHub Trending热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/github', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getGithubHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/baidu:
+ *   get:
+ *     summary: 百度热搜榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/baidu', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getBaiduHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/csdn:
+ *   get:
+ *     summary: CSDN热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/csdn', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getCsdnHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/36kr:
+ *   get:
+ *     summary: 36氪热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/36kr', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await get36krHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/maoyan:
+ *   get:
+ *     summary: 猫眼电影热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/maoyan', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getMaoyanHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/douban:
+ *   get:
+ *     summary: 豆瓣热门榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/douban', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getDoubanHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/hupu:
+ *   get:
+ *     summary: 虎扑热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/hupu', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getHupuHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/douyin:
+ *   get:
+ *     summary: 抖音热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/douyin', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getDouyinHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/kuaishou:
+ *   get:
+ *     summary: 快手热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/kuaishou', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getKuaishouHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/toutiao:
+ *   get:
+ *     summary: 今日头条热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/toutiao', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getToutiaoHot(size);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/tools/hot/xiaohongshu:
+ *   get:
+ *     summary: 小红书热榜
+ *     tags: [资讯热榜]
+ *     parameters:
+ *       - in: query
+ *         name: size
+ *         schema:
+ *           type: number
+ *         description: 返回数量(默认10，最大50)
+ *     responses:
+ *       200:
+ *         description: 成功
+ */
+router.get('/hot/xiaohongshu', async (req, res, next) => {
+  try {
+    const size = parseInt(req.query.size) || 10;
+    const result = await getXiaohongshuHot(size);
     res.json(result);
   } catch (err) {
     next(err);

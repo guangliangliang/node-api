@@ -19,12 +19,13 @@ async function initData() {
     console.log('表结构同步完成');
 
     // ==================== 插入分类 ====================
-    const categories = [
-      { name: '生活查询', icon: 'sun', sort: 10, status: 1 },
-      { name: '识别服务', icon: 'idcard', sort: 11, status: 1 },
-      { name: '实用工具', icon: 'tool', sort: 12, status: 1 },
-      { name: '趣味查询', icon: 'star', sort: 13, status: 1 }
-    ];
+const categories = [
+  { name: '生活查询', icon: 'sun', sort: 10, status: 1 },
+  { name: '识别服务', icon: 'idcard', sort: 11, status: 1 },
+  { name: '实用工具', icon: 'tool', sort: 12, status: 1 },
+  { name: '趣味查询', icon: 'star', sort: 13, status: 1 },
+  { name: '资讯热榜', icon: 'fire', sort: 14, status: 1 }
+];
 
     console.log('\n开始插入分类...');
     for (const cat of categories) {
@@ -422,6 +423,248 @@ async function initData() {
         response_example: JSON.stringify({ code: 200, data: { lunar: { date: '2026年润二月初八' } } }),
         doc_content: '# 万年历接口\n\n查询公历农历转换和节假日信息。',
         sort: 6, status: 1
+      },
+
+      // 资讯热榜类
+      {
+        category_id: catMap['资讯热榜'],
+        name: '掘金热榜',
+        description: '获取掘金技术社区热门榜单',
+        method: 'GET',
+        path: '/hot/juejin',
+        target_url: '/api/tools/hot/juejin',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '标题', url: '链接', hot: '10w+', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 掘金热榜接口\n\n获取掘金技术社区的热门文章榜单。',
+        sort: 1, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '知乎热榜',
+        description: '获取知乎平台热门榜单',
+        method: 'GET',
+        path: '/hot/zhihu',
+        target_url: '/api/tools/hot/zhihu',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '标题', url: '链接', hot: '100万+', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 知乎热榜接口\n\n获取知乎平台的实时热门榜单。',
+        sort: 2, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: 'V2EX热榜',
+        description: '获取V2EX社区热门榜单',
+        method: 'GET',
+        path: '/hot/v2ex',
+        target_url: '/api/tools/hot/v2ex',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '标题', url: '链接', hot: '1k 回复', desc: '简介', cover: '' }] }),
+        doc_content: '# V2EX热榜接口\n\n获取V2EX技术社区的实时热门讨论榜单。',
+        sort: 3, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: 'B站热门榜',
+        description: '获取B站全站热门榜单',
+        method: 'GET',
+        path: '/hot/bilibili',
+        target_url: '/api/tools/hot/bilibili',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '标题', url: '链接', hot: '100万 播放', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# B站热门榜接口\n\n获取B站全站综合热门视频榜单。',
+        sort: 4, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '微博热搜榜',
+        description: '获取微博实时热搜榜单',
+        method: 'GET',
+        path: '/hot/weibo',
+        target_url: '/api/tools/hot/weibo',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '标题', url: '链接', hot: '500万 热度', desc: '分类', cover: '图片链接' }] }),
+        doc_content: '# 微博热搜榜接口\n\n获取微博平台的实时热搜榜单。',
+        sort: 5, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: 'GitHub Trending热榜',
+        description: '获取GitHub开源项目趋势榜',
+        method: 'GET',
+        path: '/hot/github',
+        target_url: '/api/tools/hot/github',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '仓库名称', url: '链接', hot: '10k 星', desc: '简介', cover: '头像链接' }] }),
+        doc_content: '# GitHub Trending热榜接口\n\n获取GitHub全球开源项目今日趋势榜单。',
+        sort: 6, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '百度热搜榜',
+        description: '获取百度实时热搜榜单',
+        method: 'GET',
+        path: '/hot/baidu',
+        target_url: '/api/tools/hot/baidu',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '标题', url: '链接', hot: '300万 热度', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 百度热搜榜接口\n\n获取百度平台的实时搜索热点榜单。',
+        sort: 7, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: 'CSDN热榜',
+        description: '获取CSDN技术社区热门榜单',
+        method: 'GET',
+        path: '/hot/csdn',
+        target_url: '/api/tools/hot/csdn',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '标题', url: '链接', hot: '50万 阅读', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# CSDN热榜接口\n\n获取CSDN技术社区的热门博客榜单。',
+        sort: 8, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '36氪热榜',
+        description: '获取36氪科技资讯热门榜单',
+        method: 'GET',
+        path: '/hot/36kr',
+        target_url: '/api/tools/hot/36kr',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '标题', url: '链接', hot: '20万 阅读', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 36氪热榜接口\n\n获取36氪平台的科技资讯热门榜单。',
+        sort: 9, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '猫眼电影热榜',
+        description: '获取猫眼实时电影票房榜单',
+        method: 'GET',
+        path: '/hot/maoyan',
+        target_url: '/api/tools/hot/maoyan',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '电影名称', url: '链接', hot: '1.2亿 票房', desc: '评分9.2分', cover: '海报链接' }] }),
+        doc_content: '# 猫眼电影热榜接口\n\n获取猫眼平台的实时电影票房热门榜单。',
+        sort: 10, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '豆瓣热门榜',
+        description: '获取豆瓣社区热门话题榜单',
+        method: 'GET',
+        path: '/hot/douban',
+        target_url: '/api/tools/hot/douban',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '话题标题', url: '链接', hot: '10万 参与', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 豆瓣热门榜接口\n\n获取豆瓣社区的热门话题讨论榜单。',
+        sort: 11, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '虎扑热榜',
+        description: '获取虎扑社区热门讨论榜单',
+        method: 'GET',
+        path: '/hot/hupu',
+        target_url: '/api/tools/hot/hupu',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '讨论标题', url: '链接', hot: '5千 回复', desc: '板块名称', cover: '' }] }),
+        doc_content: '# 虎扑热榜接口\n\n获取虎扑社区的热门讨论榜单。',
+        sort: 12, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '抖音热榜',
+        description: '获取抖音平台实时热榜',
+        method: 'GET',
+        path: '/hot/douyin',
+        target_url: '/api/tools/hot/douyin',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '热点标题', url: '链接', hot: '500万 热度', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 抖音热榜接口\n\n获取抖音平台的实时热门榜单。',
+        sort: 13, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '快手热榜',
+        description: '获取快手平台实时热榜',
+        method: 'GET',
+        path: '/hot/kuaishou',
+        target_url: '/api/tools/hot/kuaishou',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '热点标题', url: '链接', hot: '300万 热度', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 快手热榜接口\n\n获取快手平台的实时热门榜单。',
+        sort: 14, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '今日头条热榜',
+        description: '获取今日头条平台实时热榜',
+        method: 'GET',
+        path: '/hot/toutiao',
+        target_url: '/api/tools/hot/toutiao',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '热点标题', url: '链接', hot: '400万 热度', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 今日头条热榜接口\n\n获取今日头条平台的实时热门榜单。',
+        sort: 15, status: 1
+      },
+      {
+        category_id: catMap['资讯热榜'],
+        name: '小红书热榜',
+        description: '获取小红书平台实时热榜',
+        method: 'GET',
+        path: '/hot/xiaohongshu',
+        target_url: '/api/tools/hot/xiaohongshu',
+        is_free: 1,
+        request_params: JSON.stringify([
+          { name: 'size', type: 'number', required: false, description: '返回数量(默认10，最大50)', example: '10' }
+        ]),
+        response_example: JSON.stringify({ code: 200, data: [{ title: '热点标题', url: '链接', hot: '200万 热度', desc: '简介', cover: '图片链接' }] }),
+        doc_content: '# 小红书热榜接口\n\n获取小红书平台的实时热门榜单。',
+        sort: 16, status: 1
       }
     ];
 
